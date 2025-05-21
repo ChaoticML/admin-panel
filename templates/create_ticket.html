@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}Create New Ticket | {{ super() }}{% endblock %}
+
+{% block head_extra %}
+<style>
+    .character-count {
+        color: #6c757d;
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h1 class="h3 mb-0"><i class="bi bi-plus-circle-fill"></i> Create New Ticket</h1>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('create_ticket') }}" method="post" id="ticketForm" class="needs-validation" novalidate enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="customer_name" class="form-label required-field">Customer Name</label>
+                            <input type="text" class="form-control" id="customer_name" name="customer_name" 
+                                   placeholder="Full name or company" required value="{{ form_data.customer_name or '' }}">
+                            <div class="invalid-feedback">Please enter customer name.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="category" class="form-label required-field">Category</label>
+                            <select class="form-select" id="category" name="category" required>
+                                <option value="">Select a category...</option>
+                                {% for cat in TICKET_CATEGORIES %}
+                                <option value="{{ cat }}" {% if form_data.category == cat %}selected{% endif %}>{{ cat }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">Please select a category.</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="customer_email" class="form-label">Customer Email</label>
+                            <input type="email" class="form-control" id="customer_email" name="customer_email" 
+                                   placeholder="example@domain.com" value="{{ form_data.customer_email or '' }}">
+                            <div class="form-text">For notifications and contact.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="customer_phone" class="form-label">Customer Phone</label>
+                            <input type="tel" class="form-control" id="customer_phone" name="customer_phone" 
+                                   placeholder="(555) 123-4567" value="{{ form_data.customer_phone or '' }}">
+                        </div>
+                    </div>
+                    
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="device_type" class="form-label">Device Type / Asset</label>
+                            <input type="text" class="form-control" id="device_type" name="device_type" 
+                                   placeholder="e.g., Laptop, Desktop, Printer XYZ-123" value="{{ form_data.device_type or '' }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="serial_number" class="form-label">Serial Number</label>
+                            <input type="text" class="form-control" id="serial_number" name="serial_number" 
+                                   placeholder="Device serial number (if applicable)" value="{{ form_data.serial_number or '' }}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label required-field">Issue Description</label>
+                        <textarea class="form-control" id="description" name="description" 
+                                  rows="5" maxlength="1000" required
+                                  placeholder="Please provide detailed information about the issue...">{{ form_data.description or '' }}</textarea>
+                        <div class="character-count">
+                            <span id="charCount">0</span>/1000 characters
+                        </div>
+                        <div class="invalid-feedback">Please provide a description of the issue.</div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="priority" class="form-label required-field">Priority</label>
+                            <select class="form-select" id="priority" name="priority" required>
+                                <option value="">Select priority level...</option>
+                                {% for prio in TICKET_PRIORITIES %}
+                                <option value="{{ prio }}" {% if form_data.priority == prio or (not form_data.priority and prio == 'Normal') %}selected{% endif %}>{{ prio }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">Please select a priority level.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="assigned_technician_id" class="form-label">Assign to Technician</label>
+                            <select class="form-select" id="assigned_technician_id" name="assigned_technician_id">
+                                <option value="">Unassigned</option>
+                                {% for tech in technicians %}
+                                    {% set form_assigned_id = form_data.get('assigned_technician_id', '') %}
+                                    <option value="{{ tech.id }}" {% if form_assigned_id and form_assigned_id | string == tech.id | string %}selected{% endif %}>{{ tech.username }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Internal Notes (optional)</label>
+                        <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Initial notes for technicians...">{{ form_data.notes or '' }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="attachments" class="form-label">Attachments</label>
+                        <input type="file" class="form-control" id="attachments" name="attachments" 
+                               multiple accept=".png,.jpg,.jpeg,.gif,.pdf,.doc,.docx,.txt">
+                        <div class="form-text">Accepted files: Images, PDF, DOC, TXT (Max 5MB total). Hold Ctrl/Cmd to select multiple.</div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Cancel</a>
+                        <button type="submit" class="btn btn-success"><i class="bi bi-check-circle-fill"></i> Create Ticket</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('ticketForm');
+    const description = document.getElementById('description');
+    const charCount = document.getElementById('charCount');
+
+    if (description && charCount) {
+        function updateCharCount() {
+            const currentLength = description.value.length;
+            charCount.textContent = currentLength;
+        }
+        description.addEventListener('input', updateCharCount);
+        updateCharCount(); // Initial count
+    }
+
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    }
+
+    const attachmentsInput = document.getElementById('attachments');
+    if (attachmentsInput) {
+        attachmentsInput.addEventListener('change', function(e) {
+            const files = e.target.files;
+            const maxSizePerFile = 5 * 1024 * 1024; // 5MB per file
+            let totalSize = 0;
+            let validFiles = true;
+
+            Array.from(files).forEach(file => {
+                totalSize += file.size;
+                if (file.size > maxSizePerFile) {
+                    alert(`File ${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB) exceeds the maximum size of 5MB per file.`);
+                    validFiles = false;
+                }
+            });
+            
+            // Example: Check total size against app.config['MAX_CONTENT_LENGTH'] (5MB total)
+            // Note: app.config['MAX_CONTENT_LENGTH'] is enforced server-side for the whole request.
+            // This client-side check is for better UX for total size of attachments.
+            const maxTotalSize = {{ MAX_CONTENT_LENGTH }}; // Passed from Flask context
+            if (totalSize > maxTotalSize) {
+                 alert(`Total size of attachments (${(totalSize / 1024 / 1024).toFixed(2)}MB) exceeds the maximum allowed total of ${(maxTotalSize / 1024 / 1024).toFixed(0)}MB.`);
+                 validFiles = false;
+            }
+
+            if (!validFiles) {
+                e.target.value = ''; // Clear the selection if any file is invalid
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

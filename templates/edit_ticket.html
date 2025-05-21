@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Ticket #{{ ticket.id }} | {{ super() }}{% endblock %}
+
+{% block head_extra %}
+<style>
+    .character-count { color: #6c757d; font-size: 0.875rem; margin-top: 5px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0"><i class="bi bi-pencil-square"></i> Edit Ticket #{{ ticket.id }}</h1>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('edit_ticket', ticket_id=ticket.id) }}" method="post" id="ticketEditForm" class="needs-validation" novalidate enctype="multipart/form-data">
+                    {# Basic Info #}
+                    <div class="row">
+                        <div class="col-md-8 mb-3">
+                            <label for="description" class="form-label required-field">Issue Description</label>
+                            <textarea class="form-control" id="description" name="description" 
+                                      rows="3" maxlength="1000" required
+                                      placeholder="Detailed information about the issue...">{{ ticket.description or '' }}</textarea>
+                            <div class="character-count"><span id="charCountDesc">0</span>/1000</div>
+                            <div class="invalid-feedback">Please provide a description.</div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="status" class="form-label required-field">Status</label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="{{ STATUS_OPEN }}" {% if ticket.status == STATUS_OPEN %}selected{% endif %}>{{ STATUS_OPEN }}</option>
+                                <option value="{{ STATUS_IN_PROGRESS }}" {% if ticket.status == STATUS_IN_PROGRESS %}selected{% endif %}>{{ STATUS_IN_PROGRESS }}</option>
+                                <option value="{{ STATUS_ON_HOLD }}" {% if ticket.status == STATUS_ON_HOLD %}selected{% endif %}>{{ STATUS_ON_HOLD }}</option>
+                                <option value="{{ STATUS_COMPLETED }}" {% if ticket.status == STATUS_COMPLETED %}selected{% endif %}>{{ STATUS_COMPLETED }}</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a status.</div>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    {# Customer Info #}
+                    <h5><i class="bi bi-person"></i> Customer Information</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="customer_name" class="form-label required-field">Customer Name</label>
+                            <input type="text" class="form-control" id="customer_name" name="customer_name" required value="{{ ticket.customer_name or '' }}">
+                            <div class="invalid-feedback">Customer name is required.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="customer_email" class="form-label">Customer Email</label>
+                            <input type="email" class="form-control" id="customer_email" name="customer_email" value="{{ ticket.customer_email or '' }}">
+                        </div>
+                         <div class="col-md-6 mb-3">
+                            <label for="customer_phone" class="form-label">Customer Phone</label>
+                            <input type="tel" class="form-control" id="customer_phone" name="customer_phone" value="{{ ticket.customer_phone or '' }}">
+                        </div>
+                    </div>
+
+                    <hr>
+                    {# Device Info #}
+                    <h5><i class="bi bi-hdd-stack"></i> Device / Asset Information</h5>
+                     <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="device_type" class="form-label">Device Type</label>
+                            <input type="text" class="form-control" id="device_type" name="device_type" value="{{ ticket.device_type or '' }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="serial_number" class="form-label">Serial Number</label>
+                            <input type="text" class="form-control" id="serial_number" name="serial_number" value="{{ ticket.serial_number or '' }}">
+                        </div>
+                    </div>
+
+                    <hr>
+                    {# Classification & Assignment #}
+                    <h5><i class="bi bi-tags"></i> Classification & Assignment</h5>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="category" class="form-label required-field">Category</label>
+                            <select class="form-select" id="category" name="category" required>
+                                {% for cat in TICKET_CATEGORIES %}
+                                <option value="{{ cat }}" {% if ticket.category == cat %}selected{% endif %}>{{ cat }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">Please select a category.</div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="priority" class="form-label required-field">Priority</label>
+                            <select class="form-select" id="priority" name="priority" required>
+                                {% for prio in TICKET_PRIORITIES %}
+                                <option value="{{ prio }}" {% if ticket.priority == prio %}selected{% endif %}>{{ prio }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">Please select a priority.</div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="assigned_technician_id" class="form-label">Assign to Technician</label>
+                            <select class="form-select" id="assigned_technician_id" name="assigned_technician_id">
+                                <option value="">Unassigned</option>
+                                {% for tech in technicians %}
+                                <option value="{{ tech.id }}" {% if ticket.assigned_technician_id | string == tech.id | string %}selected{% endif %}>{{ tech.username }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    {# Notes #}
+                    <h5><i class="bi bi-journal-text"></i> Internal Notes</h5>
+                     <div class="mb-3">
+                        <label for="notes" class="form-label">Notes (append new or edit existing)</label>
+                        <textarea class="form-control" id="notes" name="notes" rows="5" placeholder="Add or update internal notes...">{{ ticket.notes or '' }}</textarea>
+                        <div class="character-count"><span id="charCountNotes">0</span>/ (no hard limit)</div>
+                    </div>
+
+                    {# Attachments - For future enhancement: list current, allow deletion, add new #}
+                    <div class="mb-3">
+                        <label for="new_attachments" class="form-label">Add New Attachments</label>
+                        <input type="file" class="form-control" id="new_attachments" name="new_attachments" multiple>
+                        <div class="form-text">
+                            Current attachments (if any) are preserved unless new files are uploaded here (this part needs backend logic to merge/replace).
+                            For now, editing ticket does not modify existing attachments. New attachments can be added via "Create Ticket" or a dedicated attachment management feature.
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{{ url_for('view_ticket', ticket_id=ticket.id) }}" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Cancel</a>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-save-fill"></i> Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function setupCharCounter(textareaId, charCountId, maxLength) {
+        const textarea = document.getElementById(textareaId);
+        const charCountDisplay = document.getElementById(charCountId);
+        if (textarea && charCountDisplay) {
+            function updateCount() {
+                const currentLength = textarea.value.length;
+                charCountDisplay.textContent = currentLength;
+            }
+            textarea.addEventListener('input', updateCount);
+            updateCount(); 
+        }
+    }
+    setupCharCounter('description', 'charCountDesc', 1000);
+    setupCharCounter('notes', 'charCountNotes');
+
+    const form = document.getElementById('ticketEditForm');
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    }
+    // Note: Client-side file validation for 'new_attachments' could be added here, similar to create_ticket.html
+});
+</script>
+{% endblock %}

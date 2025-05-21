@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | {{ super() }}{% endblock %}
+
+{% block head_extra %}
+<style>
+    .stat-card { margin-bottom: 1.5rem; }
+    .stat-card .card-body { display: flex; justify-content: space-between; align-items: center; }
+    .stat-card .stat-icon { font-size: 2.5rem; opacity: 0.6; }
+    .stat-card .stat-number { font-size: 2rem; font-weight: bold; }
+    .table-sm th, .table-sm td { padding: 0.4rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><i class="bi bi-bar-chart-line-fill"></i> System Dashboard</h1>
+</div>
+
+{# Quick Stats Cards #}
+<div class="row">
+    <div class="col-md-6 col-xl-3">
+        <div class="card stat-card bg-primary text-white shadow-sm">
+            <div class="card-body">
+                <div>
+                    <div class="stat-number">{{ status_counts.get(STATUS_OPEN, 0) }}</div>
+                    <div class="stat-label">Open Tickets</div>
+                </div>
+                <i class="bi bi-folder2-open stat-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card stat-card bg-info text-white shadow-sm">
+            <div class="card-body">
+                <div>
+                    <div class="stat-number">{{ status_counts.get(STATUS_IN_PROGRESS, 0) }}</div>
+                    <div class="stat-label">In Progress</div>
+                </div>
+                <i class="bi bi-hourglass-split stat-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card stat-card bg-warning text-dark shadow-sm">
+            <div class="card-body">
+                <div>
+                    <div class="stat-number">{{ status_counts.get(STATUS_ON_HOLD, 0) }}</div>
+                    <div class="stat-label">On Hold</div>
+                </div>
+                <i class="bi bi-pause-circle stat-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card stat-card bg-success text-white shadow-sm">
+            <div class="card-body">
+                <div>
+                    <div class="stat-number">{{ status_counts.get(STATUS_COMPLETED, 0) }}</div>
+                    <div class="stat-label">Completed Tickets</div>
+                </div>
+                <i class="bi bi-check2-circle stat-icon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    {# Recent Tickets Table #}
+    <div class="col-lg-7 mb-4 mb-lg-0">
+        <div class="card shadow-sm">
+            <div class="card-header"><i class="bi bi-clock-history"></i> Recent Tickets</div>
+            <div class="card-body">
+                {% if recent_tickets %}
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr><th>ID</th><th>Description</th><th>Status</th><th>Priority</th><th>Assigned</th></tr>
+                        </thead>
+                        <tbody>
+                        {% for ticket in recent_tickets %}
+                            <tr>
+                                <td><a href="{{ url_for('view_ticket', ticket_id=ticket.id) }}">#{{ ticket.id }}</a></td>
+                                <td>{{ ticket.description | truncate(40) }}</td>
+                                <td><span class="badge bg-{{ ticket.status.lower().replace(' ', '-') }}">{{ ticket.status }}</span></td>
+                                <td><span class="badge bg-{{ ticket.priority.lower().replace(' ', '-') if ticket.priority else 'secondary' }}">{{ ticket.priority }}</span></td>
+                                <td>{{ ticket.assigned_technician_username | default('N/A') }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-center">No recent tickets.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {# Technician Load / Other Stats #}
+    <div class="col-lg-5">
+        <div class="card shadow-sm mb-3">
+            <div class="card-header"><i class="bi bi-person-gear"></i> Technician Workload (Active)</div>
+            <div class="card-body">
+                {% if technician_load %}
+                <ul class="list-group list-group-flush">
+                    {% for tech in technician_load %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ tech.username }}
+                        <span class="badge bg-primary rounded-pill">{{ tech.ticket_count }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-center">No technician data available.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card shadow-sm">
+            <div class="card-header"><i class="bi bi-pie-chart"></i> Tickets by Category</div>
+            <div class="card-body">
+                 {% if category_counts %}
+                <ul class="list-group list-group-flush">
+                    {% for category, count in category_counts.items()|sort %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ category }}
+                        <span class="badge bg-secondary rounded-pill">{{ count }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-center">No category data available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{# Add Chart.js or other charting library scripts here if you implement charts #}
+{% endblock %}

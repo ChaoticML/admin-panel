@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Ticket #{{ ticket.id }} | {{ super() }}{% endblock %}
+
+{% block head_extra %}
+<style>
+    .ticket-detail-card { margin-bottom: 1.5rem; }
+    .ticket-detail-label { font-weight: bold; color: #555; }
+    .notes-section { margin-top: 2rem; }
+    .note-entry {
+        border-left: 3px solid #0d6efd;
+        padding-left: 15px;
+        margin-bottom: 15px;
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .note-meta { font-size: 0.85em; color: #6c757d; margin-bottom: 5px; }
+    .attachment-list li { margin-bottom: 5px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><i class="bi bi-ticket-detailed-fill"></i> Ticket Details: #{{ ticket.id }}</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a href="{{ url_for('edit_ticket', ticket_id=ticket.id) }}" class="btn btn-primary me-2"><i class="bi bi-pencil-square"></i> Edit Ticket</a>
+        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left-circle"></i> Back to List</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <!-- Main Ticket Info -->
+        <div class="card shadow-sm ticket-detail-card">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Issue: {{ ticket.description | truncate(80) }}</h5>
+                <span class="badge fs-6 bg-{{ ticket.status.lower().replace(' ', '-') }}">{{ ticket.status }}</span>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <p class="ticket-detail-label">Full Description:</p>
+                        <p style="white-space: pre-wrap;">{{ ticket.description }}</p>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-6 mb-2"><p><span class="ticket-detail-label">Category:</span> {{ ticket.category | default('N/A') }}</p></div>
+                    <div class="col-md-6 mb-2"><p><span class="ticket-detail-label">Priority:</span> <span class="badge bg-{{ ticket.priority.lower() if ticket.priority else 'secondary' }}">{{ ticket.priority | default('N/A') }}</span></p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes Section -->
+        <div class="card shadow-sm ticket-detail-card notes-section">
+            <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="bi bi-card-text"></i> Notes History</h5>
+            </div>
+            <div class="card-body">
+                {% if ticket.notes %}
+                    {% for note_part in ticket.notes.split('\n---\n') %}
+                        {% if note_part.strip() %}
+                        <div class="note-entry">
+                            {% set note_lines = note_part.strip().split('\n', 1) %}
+                            {% if note_lines[0].startswith(ticket.created_at.strftime('%Y-%m-%d')) and 'by' in note_lines[0] %}
+                                <div class="note-meta">{{ note_lines[0] }}</div>
+                                <p style="white-space: pre-wrap;">{{ note_lines[1] | default('') }}</p>
+                            {% else %}
+                                 {# For older notes or initial note not following the new format #}
+                                 {% if loop.first and not ('by' in note_part and ':' in note_part) %}
+                                    <div class="note-meta">Initial Note ({{ ticket.created_at.strftime('%Y-%m-%d %H:%M') }}) by {{ ticket.created_by_username or 'System' }}:</div>
+                                 {% endif %}
+                                <p style="white-space: pre-wrap;">{{ note_part.strip() }}</p>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p>No notes added yet.</p>
+                {% endif %}
+                <hr>
+                <h6>Add New Note:</h6>
+                <form action="{{ url_for('add_ticket_note', ticket_id=ticket.id) }}" method="post">
+                    <div class="mb-3">
+                        <textarea name="note_content" class="form-control" rows="3" placeholder="Type your note here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-success"><i class="bi bi-plus-lg"></i> Add Note</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <!-- Customer & Device Info -->
+        <div class="card shadow-sm ticket-detail-card">
+            <div class="card-header bg-light"><h5 class="mb-0"><i class="bi bi-person-badge"></i> Customer & Device</h5></div>
+            <div class="card-body">
+                <p><span class="ticket-detail-label">Customer:</span> {{ ticket.customer_name | default('N/A') }}</p>
+                <p><span class="ticket-detail-label">Email:</span> {{ ticket.customer_email | default('N/A') }}</p>
+                <p><span class="ticket-detail-label">Phone:</span> {{ ticket.customer_phone | default('N/A') }}</p>
+                <hr>
+                <p><span class="ticket-detail-label">Device Type:</span> {{ ticket.device_type | default('N/A') }}</p>
+                <p><span class="ticket-detail-label">Serial Number:</span> {{ ticket.serial_number | default('N/A') }}</p>
+            </div>
+        </div>
+
+        <!-- Dates & Assignment -->
+        <div class="card shadow-sm ticket-detail-card">
+            <div class="card-header bg-light"><h5 class="mb-0"><i class="bi bi-calendar-event"></i> Dates & Assignment</h5></div>
+            <div class="card-body">
+                <p><span class="ticket-detail-label">Created:</span> {{ ticket.created_at.strftime('%Y-%m-%d %H:%M:%S') if ticket.created_at else '-' }} by {{ ticket.created_by_username or 'N/A' }}</p>
+                <p><span class="ticket-detail-label">Last Updated:</span> {{ ticket.updated_at.strftime('%Y-%m-%d %H:%M:%S') if ticket.updated_at else '-' }}</p>
+                {% if ticket.completed_at %}
+                <p><span class="ticket-detail-label">Completed:</span> {{ ticket.completed_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                {% endif %}
+                <hr>
+                <p><span class="ticket-detail-label">Assigned To:</span> {{ ticket.assigned_technician_username | default('Unassigned') }}</p>
+            </div>
+        </div>
+        
+        <!-- Attachments -->
+        {% if attachments %}
+        <div class="card shadow-sm ticket-detail-card">
+            <div class="card-header bg-light"><h5 class="mb-0"><i class="bi bi-paperclip"></i> Attachments</h5></div>
+            <div class="card-body">
+                <ul class="list-unstyled attachment-list">
+                    {% for attachment in attachments %}
+                    <li><a href="{{ url_for('uploaded_file', filename=attachment) }}" target="_blank"><i class="bi bi-file-earmark-arrow-down"></i> {{ attachment }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

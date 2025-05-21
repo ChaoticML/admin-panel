@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Login | {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5 col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-header text-center bg-primary text-white">
+                <h3><i class="bi bi-box-arrow-in-right"></i> Login</h3>
+            </div>
+            <div class="card-body p-4">
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endif %}
+                <form method="post" action="{{ url_for('login', next=request.args.get('next')) }}">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-door-open"></i> Login</button>
+                </form>
+                <!-- Optional: Add forgot password or registration links -->
+                <!-- 
+                <div class="text-center mt-3">
+                    <a href="#">Forgot password?</a>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

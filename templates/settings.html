@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Settings | {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><i class="bi bi-gear-fill"></i> Application Settings</h1>
+</div>
+
+<div class="alert alert-info" role="alert">
+  <h4 class="alert-heading">Under Construction!</h4>
+  <p>The settings page is currently under development. Soon you'll be able to customize various aspects of the application here.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">General Settings</div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="appName" class="form-label">Application Name</label>
+                        <input type="text" class="form-control" id="appName" value="Repair Shop Admin" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="adminEmail" class="form-label">Administrator Email</label>
+                        <input type="email" class="form-control" id="adminEmail" value="{{ ADMIN_EMAIL | default('Not Set') }}" disabled>
+                        <div class="form-text">This is configured via environment variables (ADMIN_EMAIL).</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" disabled>Save Settings (Disabled)</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

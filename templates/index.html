@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}Ticket Dashboard | {{ super() }}{% endblock %}
+
+{% block head_extra %}
+<style>
+    .search-container { margin-bottom: 20px; }
+    .table th a { text-decoration: none; }
+    .table th a:hover { text-decoration: underline; }
+    .action-buttons .btn { margin-right: 5px; margin-bottom: 5px; }
+    .priority-badge { font-size: 0.8em; padding: .3em .6em; }
+    .table-actions .btn, .table-actions .form-select-sm {
+        margin-bottom: 0.25rem; /* Add a little space for wrapped items */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><i class="bi bi-ticket-detailed"></i> Ticket Management</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a href="{{ url_for('create_ticket') }}" class="btn btn-success"><i class="bi bi-plus-circle-fill"></i> Create New Ticket</a>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header">
+        <i class="bi bi-funnel"></i> Filters & Search
+    </div>
+    <div class="card-body">
+        <form method="get" action="{{ url_for('index') }}">
+            <div class="row g-3">
+                <div class="col-md-5">
+                    <label for="search" class="form-label">Search Term</label>
+                    <input type="text" id="search" name="search" class="form-control" placeholder="ID, Description, Customer, Device..." value="{{ search_term or '' }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="statusFilter" class="form-label">Status</label>
+                    <select id="statusFilter" name="status" class="form-select">
+                        <option value="all" {% if status_filter == 'all' %}selected{% endif %}>All Statuses</option>
+                        <option value="{{ STATUS_OPEN }}" {% if status_filter == STATUS_OPEN %}selected{% endif %}>{{ STATUS_OPEN }} ({{ status_counts.get(STATUS_OPEN, 0) }})</option>
+                        <option value="{{ STATUS_IN_PROGRESS }}" {% if status_filter == STATUS_IN_PROGRESS %}selected{% endif %}>{{ STATUS_IN_PROGRESS }} ({{ status_counts.get(STATUS_IN_PROGRESS, 0) }})</option>
+                        <option value="{{ STATUS_ON_HOLD }}" {% if status_filter == STATUS_ON_HOLD %}selected{% endif %}>{{ STATUS_ON_HOLD }} ({{ status_counts.get(STATUS_ON_HOLD, 0) }})</option>
+                        <option value="{{ STATUS_COMPLETED }}" {% if status_filter == STATUS_COMPLETED %}selected{% endif %}>{{ STATUS_COMPLETED }} ({{ status_counts.get(STATUS_COMPLETED, 0) }})</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="priorityFilter" class="form-label">Priority</label>
+                    <select id="priorityFilter" name="priority" class="form-select">
+                        <option value="all" {% if priority_filter == 'all' %}selected{% endif %}>All Priorities</option>
+                        {% for prio in TICKET_PRIORITIES %}
+                        <option value="{{ prio }}" {% if priority_filter == prio %}selected{% endif %}>{{ prio }} ({{ priority_counts.get(prio, 0) }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2"><i class="bi bi-search"></i> Filter</button>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary"><i class="bi bi-arrow-clockwise"></i> Reset</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                {% macro sort_th(column_key, display_name) %}
+                <th>
+                    <a href="{{ url_for('index', sort=column_key, order='asc' if sort_by == column_key and sort_order == 'desc' else 'desc', status=status_filter, priority=priority_filter, search=search_term) }}"
+                       class="text-white">
+                        {{ display_name }}
+                        {% if sort_by == column_key %}
+                            {% if sort_order == 'asc' %}<i class="bi bi-sort-up"></i>
+                            {% else %}<i class="bi bi-sort-down"></i>{% endif %}
+                        {% endif %}
+                    </a>
+                </th>
+                {% endmacro %}
+                {{ sort_th('id', 'ID') }}
+                {{ sort_th('description', 'Description') }}
+                {{ sort_th('status', 'Status') }}
+                {{ sort_th('priority', 'Priority') }}
+                {{ sort_th('category', 'Category') }}
+                {{ sort_th('customer_name', "Customer") }}
+                {{ sort_th('device_type', "Device") }}
+                <th>Assigned To</th>
+                {{ sort_th('created_at', 'Created') }}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="ticketTableBody">
+            {% for ticket in tickets %}
+            <tr class="
+                {% if ticket.status == STATUS_OPEN %}status-open
+                {% elif ticket.status == STATUS_IN_PROGRESS %}status-in-progress
+                {% elif ticket.status == STATUS_COMPLETED %}status-completed
+                {% elif ticket.status == STATUS_ON_HOLD %}table-warning
+                {% endif %}
+                priority-{{ ticket.priority.lower() if ticket.priority else 'normal' }}
+            ">
+                <td>#{{ ticket.id }}</td>
+                <td>
+                    <a href="{{ url_for('view_ticket', ticket_id=ticket.id) }}" title="{{ ticket.description }}">
+                        {{ ticket.description | truncate(50, True) }}
+                    </a>
+                </td>
+                <td>
+                    <form action="{{ url_for('update_ticket_status', ticket_id=ticket.id) }}" method="post" class="d-inline-block" style="min-width: 130px;">
+                        <select name="status" class="form-select form-select-sm" onchange="this.form.submit()" aria-label="Update status for ticket {{ticket.id}}">
+                            <option value="{{ STATUS_OPEN }}" {% if ticket.status == STATUS_OPEN %}selected{% endif %}>{{ STATUS_OPEN }}</option>
+                            <option value="{{ STATUS_IN_PROGRESS }}" {% if ticket.status == STATUS_IN_PROGRESS %}selected{% endif %}>{{ STATUS_IN_PROGRESS }}</option>
+                            <option value="{{ STATUS_ON_HOLD }}" {% if ticket.status == STATUS_ON_HOLD %}selected{% endif %}>{{ STATUS_ON_HOLD }}</option>
+                            <option value="{{ STATUS_COMPLETED }}" {% if ticket.status == STATUS_COMPLETED %}selected{% endif %}>{{ STATUS_COMPLETED }}</option>
+                        </select>
+                    </form>
+                </td>
+                <td><span class="badge priority-badge bg-{{ ticket.priority.lower().replace(' ', '-') if ticket.priority else 'secondary' }}">{{ ticket.priority | default('N/A') }}</span></td>
+                <td>{{ ticket.category | default('N/A') }}</td>
+                <td>{{ ticket.customer_name | default('N/A') }}</td>
+                <td>{{ ticket.device_type | default('N/A') }}</td>
+                <td>{{ ticket.assigned_technician_username | default('Unassigned') }}</td>
+                <td>
+                    <span title="{{ ticket.created_at.strftime('%Y-%m-%d %H:%M:%S') if ticket.created_at else '' }}">
+                        {{ ticket.created_at.strftime('%b %d, %Y') if ticket.created_at else '-' }}
+                    </span>
+                </td>
+                <td class="table-actions">
+                    <a href="{{ url_for('view_ticket', ticket_id=ticket.id) }}" class="btn btn-sm btn-outline-info" title="View Details"><i class="bi bi-eye-fill"></i></a>
+                    <a href="{{ url_for('edit_ticket', ticket_id=ticket.id) }}" class="btn btn-sm btn-outline-primary" title="Edit Ticket"><i class="bi bi-pencil-square"></i></a>
+                    {% if session.role == ROLE_ADMIN or session.user_id == ticket.created_by_user_id %}
+                    <form action="{{ url_for('delete_ticket', ticket_id=ticket.id) }}" method="post" style="display: inline;" onsubmit="return confirm('Are you sure you want to permanently delete ticket #{{ ticket.id }}? This cannot be undone.')">
+                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete Ticket"><i class="bi bi-trash-fill"></i></button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="10" class="text-center">No tickets found matching your criteria.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+// Any specific JS for this page can go here.
+</script>
+{% endblock %}

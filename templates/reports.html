@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Reports | {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><i class="bi bi-file-earmark-text-fill"></i> Reports</h1>
+</div>
+
+<div class="alert alert-info" role="alert">
+  <h4 class="alert-heading">Under Construction!</h4>
+  <p>The reports section is currently under development. Please check back later for exciting new features and data insights!</p>
+  <hr>
+  <p class="mb-0">We are working hard to bring you valuable reporting tools.</p>
+</div>
+
+{# You can add placeholders for future reports here #}
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-header">Ticket Volume Over Time</div>
+            <div class="card-body">
+                <p class="text-muted text-center p-4">Chart will be displayed here.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-header">Resolution Time Analysis</div>
+            <div class="card-body">
+                <p class="text-muted text-center p-4">Data on average resolution times will appear here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}500 - Server Error | {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-1 text-danger">500</h1>
+    <h2 class="text-danger">Oops! Something went wrong on our end.</h2>
+    <p class="lead">
+        We are experiencing an internal server error. Our team has been notified.
+        Please try again later.
+    </p>
+    <p>If the problem persists, you can contact support.</p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary mt-3"><i class="bi bi-house-door"></i> Go to Homepage</a>
+</div>
+{% endblock %}

@@ -1,0 +1,211 @@
+2025-05-21 15:44:11,514 - __main__ - INFO - Database not found, initializing...
+2025-05-21 15:44:11,598 - __main__ - INFO - Default admin user 'admin' created.
+2025-05-21 15:44:11,604 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 15:44:11,604 - __main__ - INFO - Uploads folder created at C:\Users\jeffr\Documents\Projects\admin_panel\uploads
+2025-05-21 15:44:11,621 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 15:44:11,621 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 15:44:11,628 - werkzeug - INFO -  * Restarting with stat
+2025-05-21 15:44:11,801 - __main__ - INFO - Database found.
+2025-05-21 15:44:11,817 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 15:44:11,818 - werkzeug - WARNING -  * Debugger is active!
+2025-05-21 15:44:11,828 - werkzeug - INFO -  * Debugger PIN: 102-270-028
+2025-05-21 15:44:22,427 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:44:22] "[32mGET / HTTP/1.1[0m" 302 -
+2025-05-21 15:44:22,440 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:44:22] "GET /login?next=http://127.0.0.1:5000/ HTTP/1.1" 200 -
+2025-05-21 15:44:22,610 - __main__ - WARNING - 404 Not Found: http://127.0.0.1:5000/favicon.ico (Referrer: http://127.0.0.1:5000/login?next=http://127.0.0.1:5000/) - 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-05-21 15:44:22,614 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:44:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-21 15:44:26,725 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:44:26] "GET /login HTTP/1.1" 200 -
+2025-05-21 15:44:32,701 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:44:32] "[32mPOST /login?next=http://127.0.0.1:5000/ HTTP/1.1[0m" 302 -
+2025-05-21 15:44:32,718 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:44:32] "GET / HTTP/1.1" 200 -
+2025-05-21 15:44:43,289 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:44:43] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 15:44:45,044 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:44:45] "GET / HTTP/1.1" 200 -
+2025-05-21 15:45:15,560 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:45:15] "[35m[1mGET /create HTTP/1.1[0m" 500 -
+2025-05-21 15:45:15,593 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:45:15] "GET /create?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-05-21 15:45:15,595 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:45:15] "GET /create?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-05-21 15:45:15,616 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:45:15] "GET /create?__debugger__=yes&cmd=resource&f=console.png&s=xtzJPtJAdLjzyr2msV03 HTTP/1.1" 200 -
+2025-05-21 15:45:15,623 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:45:15] "GET /create?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-05-21 15:45:17,349 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:45:17] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 15:45:18,073 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:45:18] "[35m[1mGET /create HTTP/1.1[0m" 500 -
+2025-05-21 15:45:18,088 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:45:18] "[36mGET /create?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-21 15:45:18,092 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:45:18] "[36mGET /create?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-21 15:45:18,095 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:45:18] "[36mGET /create?__debugger__=yes&cmd=resource&f=console.png&s=xtzJPtJAdLjzyr2msV03 HTTP/1.1[0m" 304 -
+2025-05-21 15:46:31,460 - __main__ - INFO - Database found.
+2025-05-21 15:46:31,460 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 15:46:31,479 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 15:46:31,480 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 15:46:31,480 - werkzeug - INFO -  * Restarting with stat
+2025-05-21 15:46:31,671 - __main__ - INFO - Database found.
+2025-05-21 15:46:31,671 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 15:46:31,680 - werkzeug - WARNING -  * Debugger is active!
+2025-05-21 15:46:31,683 - werkzeug - INFO -  * Debugger PIN: 102-270-028
+2025-05-21 15:46:33,331 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:46:33] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 15:46:34,704 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:46:34] "GET /create HTTP/1.1" 200 -
+2025-05-21 15:46:56,629 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:46:56] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 15:46:57,096 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:46:57] "[35m[1mGET /users HTTP/1.1[0m" 500 -
+2025-05-21 15:46:57,126 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:46:57] "GET /users?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-05-21 15:46:57,141 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:46:57] "GET /users?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-05-21 15:46:57,149 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:46:57] "GET /users?__debugger__=yes&cmd=resource&f=console.png&s=LwvhcYr5OfunxCq4i93p HTTP/1.1" 200 -
+2025-05-21 15:46:57,157 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:46:57] "GET /users?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-05-21 15:47:36,375 - __main__ - INFO - Database found.
+2025-05-21 15:47:36,376 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 15:47:36,397 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 15:47:36,397 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 15:47:36,398 - werkzeug - INFO -  * Restarting with stat
+2025-05-21 15:47:36,586 - __main__ - INFO - Database found.
+2025-05-21 15:47:36,587 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 15:47:36,596 - werkzeug - WARNING -  * Debugger is active!
+2025-05-21 15:47:36,598 - werkzeug - INFO -  * Debugger PIN: 102-270-028
+2025-05-21 15:47:38,060 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:47:38] "GET /users HTTP/1.1" 200 -
+2025-05-21 15:47:45,849 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:47:45] "GET /reports HTTP/1.1" 200 -
+2025-05-21 15:47:50,494 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:47:50] "[35m[1mGET /settings HTTP/1.1[0m" 500 -
+2025-05-21 15:47:50,530 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:47:50] "[36mGET /settings?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-21 15:47:50,536 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:47:50] "[36mGET /settings?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-21 15:47:50,542 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:47:50] "GET /settings?__debugger__=yes&cmd=resource&f=console.png&s=5LeXkrDqpWUsqcERzh6w HTTP/1.1" 200 -
+2025-05-21 15:48:56,431 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:48:56] "GET / HTTP/1.1" 200 -
+2025-05-21 15:49:23,953 - __main__ - INFO - Database found.
+2025-05-21 15:49:23,954 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 15:49:23,972 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 15:49:23,972 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 15:49:23,973 - werkzeug - INFO -  * Restarting with stat
+2025-05-21 15:49:24,162 - __main__ - INFO - Database found.
+2025-05-21 15:49:24,163 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 15:49:24,173 - werkzeug - WARNING -  * Debugger is active!
+2025-05-21 15:49:24,175 - werkzeug - INFO -  * Debugger PIN: 102-270-028
+2025-05-21 15:49:25,964 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:49:25] "GET / HTTP/1.1" 200 -
+2025-05-21 15:49:27,758 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:49:27] "GET /settings HTTP/1.1" 200 -
+2025-05-21 15:49:32,112 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:49:32] "GET /users HTTP/1.1" 200 -
+2025-05-21 15:49:32,670 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:49:32] "GET /reports HTTP/1.1" 200 -
+2025-05-21 15:49:33,273 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:49:33] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 15:49:33,648 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:49:33] "GET /create HTTP/1.1" 200 -
+2025-05-21 15:49:34,005 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:49:34] "GET / HTTP/1.1" 200 -
+2025-05-21 15:49:34,289 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:49:34] "GET / HTTP/1.1" 200 -
+2025-05-21 15:49:35,201 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:49:35] "GET / HTTP/1.1" 200 -
+2025-05-21 15:49:35,561 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:49:35] "GET / HTTP/1.1" 200 -
+2025-05-21 15:54:20,312 - __main__ - INFO - Database found.
+2025-05-21 15:54:20,312 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 15:54:20,331 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 15:54:20,331 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 15:54:20,332 - werkzeug - INFO -  * Restarting with stat
+2025-05-21 15:54:20,522 - __main__ - INFO - Database found.
+2025-05-21 15:54:20,522 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 15:54:20,532 - werkzeug - WARNING -  * Debugger is active!
+2025-05-21 15:54:20,534 - werkzeug - INFO -  * Debugger PIN: 102-270-028
+2025-05-21 15:54:23,476 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:54:23] "GET / HTTP/1.1" 200 -
+2025-05-21 15:54:52,570 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:54:52] "GET /create HTTP/1.1" 200 -
+2025-05-21 15:55:02,768 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:55:02] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 15:55:05,574 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:55:05] "GET /users HTTP/1.1" 200 -
+2025-05-21 15:55:07,852 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:55:07] "GET /reports HTTP/1.1" 200 -
+2025-05-21 15:55:09,690 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:55:09] "GET /settings HTTP/1.1" 200 -
+2025-05-21 15:57:08,691 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:57:08] "GET /settings HTTP/1.1" 200 -
+2025-05-21 15:57:09,323 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 15:57:09] "GET / HTTP/1.1" 200 -
+2025-05-21 16:05:16,882 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:05:16] "GET / HTTP/1.1" 200 -
+2025-05-21 16:05:21,492 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:05:21] "GET / HTTP/1.1" 200 -
+2025-05-21 16:05:23,212 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:05:23] "GET /create HTTP/1.1" 200 -
+2025-05-21 16:05:24,538 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:05:24] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 16:05:26,292 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:05:26] "GET / HTTP/1.1" 200 -
+2025-05-21 16:05:59,675 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:05:59] "GET / HTTP/1.1" 200 -
+2025-05-21 16:21:17,401 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 16:21:17,419 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 16:21:17,419 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 16:21:17,420 - werkzeug - INFO -  * Restarting with stat
+2025-05-21 16:21:17,604 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 16:21:17,613 - werkzeug - WARNING -  * Debugger is active!
+2025-05-21 16:21:17,614 - werkzeug - INFO -  * Debugger PIN: 102-270-028
+2025-05-21 16:21:21,871 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:21] "GET / HTTP/1.1" 200 -
+2025-05-21 16:21:24,613 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:24] "GET / HTTP/1.1" 200 -
+2025-05-21 16:21:28,220 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:28] "GET / HTTP/1.1" 200 -
+2025-05-21 16:21:29,203 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:29] "[35m[1mGET /create HTTP/1.1[0m" 500 -
+2025-05-21 16:21:29,242 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:29] "[36mGET /create?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-21 16:21:29,245 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:29] "[36mGET /create?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-21 16:21:29,263 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:29] "GET /create?__debugger__=yes&cmd=resource&f=console.png&s=Q9CHblkeeot9rp91WhFX HTTP/1.1" 200 -
+2025-05-21 16:21:30,881 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:30] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 16:21:31,730 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:31] "[35m[1mGET /create HTTP/1.1[0m" 500 -
+2025-05-21 16:21:31,744 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:31] "[36mGET /create?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-21 16:21:31,751 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:31] "[36mGET /create?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-21 16:21:31,755 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:21:31] "[36mGET /create?__debugger__=yes&cmd=resource&f=console.png&s=Q9CHblkeeot9rp91WhFX HTTP/1.1[0m" 304 -
+2025-05-21 16:23:11,951 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 16:23:11,968 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 16:23:11,968 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 16:23:11,969 - werkzeug - INFO -  * Restarting with stat
+2025-05-21 16:23:12,167 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 16:23:12,177 - werkzeug - WARNING -  * Debugger is active!
+2025-05-21 16:23:12,178 - werkzeug - INFO -  * Debugger PIN: 102-270-028
+2025-05-21 16:23:14,860 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:14] "[32mGET / HTTP/1.1[0m" 302 -
+2025-05-21 16:23:14,879 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:14] "GET /login?next=http://127.0.0.1:5000/ HTTP/1.1" 200 -
+2025-05-21 16:23:14,959 - __main__ - WARNING - 404 Not Found: http://127.0.0.1:5000/favicon.ico (Referrer: http://127.0.0.1:5000/login?next=http://127.0.0.1:5000/) - 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-05-21 16:23:14,961 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:14] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-21 16:23:22,657 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:22] "POST /login?next=http://127.0.0.1:5000/ HTTP/1.1" 200 -
+2025-05-21 16:23:26,109 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:26] "[32mPOST /login?next=http://127.0.0.1:5000/ HTTP/1.1[0m" 302 -
+2025-05-21 16:23:26,125 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:26] "GET / HTTP/1.1" 200 -
+2025-05-21 16:23:27,738 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:27] "GET /create HTTP/1.1" 200 -
+2025-05-21 16:23:28,923 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:28] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 16:23:29,503 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:29] "[35m[1mGET /users HTTP/1.1[0m" 500 -
+2025-05-21 16:23:29,538 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:29] "[36mGET /users?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-21 16:23:29,544 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:29] "[36mGET /users?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-21 16:23:29,559 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:29] "GET /users?__debugger__=yes&cmd=resource&f=console.png&s=SeiyQjbY2DKn8V3FJpQ6 HTTP/1.1" 200 -
+2025-05-21 16:23:29,566 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:29] "[36mGET /users?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-21 16:23:30,818 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:30] "[35m[1mGET /reports HTTP/1.1[0m" 500 -
+2025-05-21 16:23:30,830 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:30] "[36mGET /reports?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-21 16:23:30,833 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:30] "[36mGET /reports?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-21 16:23:30,838 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:30] "GET /reports?__debugger__=yes&cmd=resource&f=console.png&s=SeiyQjbY2DKn8V3FJpQ6 HTTP/1.1" 200 -
+2025-05-21 16:23:31,566 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:23:31] "GET /settings HTTP/1.1" 200 -
+2025-05-21 16:25:31,212 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 16:25:31,234 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 16:25:31,234 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 16:25:31,235 - werkzeug - INFO -  * Restarting with stat
+2025-05-21 16:25:31,430 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 16:25:31,440 - werkzeug - WARNING -  * Debugger is active!
+2025-05-21 16:25:31,442 - werkzeug - INFO -  * Debugger PIN: 102-270-028
+2025-05-21 16:25:33,270 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:25:33] "GET / HTTP/1.1" 200 -
+2025-05-21 16:25:35,618 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:25:35] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 16:25:36,257 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:25:36] "GET /users HTTP/1.1" 200 -
+2025-05-21 16:25:36,971 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:25:36] "[35m[1mGET /reports HTTP/1.1[0m" 500 -
+2025-05-21 16:25:37,002 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:25:37] "[36mGET /reports?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-21 16:25:37,010 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:25:37] "[36mGET /reports?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-21 16:25:37,017 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:25:37] "GET /reports?__debugger__=yes&cmd=resource&f=console.png&s=yyUQfPFqhu0De45v7R77 HTTP/1.1" 200 -
+2025-05-21 16:28:07,738 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 16:28:07,759 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 16:28:07,759 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 16:28:07,760 - werkzeug - INFO -  * Restarting with stat
+2025-05-21 16:28:07,957 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 16:28:07,966 - werkzeug - WARNING -  * Debugger is active!
+2025-05-21 16:28:07,968 - werkzeug - INFO -  * Debugger PIN: 102-270-028
+2025-05-21 16:28:10,597 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:10] "[32mGET / HTTP/1.1[0m" 302 -
+2025-05-21 16:28:10,610 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:10] "GET /login?next=http://127.0.0.1:5000/ HTTP/1.1" 200 -
+2025-05-21 16:28:10,678 - __main__ - WARNING - 404 Not Found: http://127.0.0.1:5000/favicon.ico (Referrer: http://127.0.0.1:5000/login?next=http://127.0.0.1:5000/) - 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-05-21 16:28:10,680 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:10] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-21 16:28:14,171 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:14] "[32mPOST /login?next=http://127.0.0.1:5000/ HTTP/1.1[0m" 302 -
+2025-05-21 16:28:14,186 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:14] "GET / HTTP/1.1" 200 -
+2025-05-21 16:28:15,552 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:15] "GET /users HTTP/1.1" 200 -
+2025-05-21 16:28:16,110 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:16] "GET /reports HTTP/1.1" 200 -
+2025-05-21 16:28:17,370 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:17] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 16:28:18,303 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:18] "GET /settings HTTP/1.1" 200 -
+2025-05-21 16:28:19,053 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:19] "GET /reports HTTP/1.1" 200 -
+2025-05-21 16:28:19,822 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:19] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 16:28:20,725 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:20] "GET /users HTTP/1.1" 200 -
+2025-05-21 16:28:21,299 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:21] "GET /create HTTP/1.1" 200 -
+2025-05-21 16:28:21,886 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:21] "GET / HTTP/1.1" 200 -
+2025-05-21 16:28:22,380 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:22] "GET / HTTP/1.1" 200 -
+2025-05-21 16:28:38,486 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:28:38] "GET /create HTTP/1.1" 200 -
+2025-05-21 16:32:35,792 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 16:32:35,810 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 16:32:35,810 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 16:32:35,812 - werkzeug - INFO -  * Restarting with stat
+2025-05-21 16:32:36,002 - __main__ - INFO - Database initialized/checked successfully
+2025-05-21 16:32:36,013 - werkzeug - WARNING -  * Debugger is active!
+2025-05-21 16:32:36,014 - werkzeug - INFO -  * Debugger PIN: 102-270-028
+2025-05-21 16:32:38,310 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:32:38] "GET /create HTTP/1.1" 200 -
+2025-05-21 16:32:39,489 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:32:39] "GET / HTTP/1.1" 200 -
+2025-05-21 16:32:41,082 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:32:41] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 16:32:42,927 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:32:42] "GET /reports HTTP/1.1" 200 -
+2025-05-21 16:32:43,305 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:32:43] "GET /users HTTP/1.1" 200 -
+2025-05-21 16:32:44,887 - werkzeug - INFO - 127.0.0.1 - - [21/May/2025 16:32:44] "GET / HTTP/1.1" 200 -

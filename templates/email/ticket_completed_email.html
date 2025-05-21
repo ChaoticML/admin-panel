@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repair Ticket #{{ ticket_id }} Completed</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f4f4f4; }
+        .container { max-width: 600px; margin: 20px auto; padding: 20px; background-color: #fff; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+        .header { background-color: #28a745; color: white; padding: 15px 20px; text-align: center; border-top-left-radius: 5px; border-top-right-radius: 5px;}
+        .header h2 { margin: 0; font-size: 1.5em; }
+        .content { padding: 20px; }
+        .content p { margin-bottom: 15px; }
+        .footer { text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee; font-size: 0.9em; color: #777; }
+        .ticket-details { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        .ticket-details th, .ticket-details td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        .ticket-details th { background-color: #f8f9fa; font-weight: bold; color: #333; }
+        strong.ticket-id { color: #0056b3; font-size: 1.1em;}
+        .shop-name { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Repair Ticket Completed</h2>
+        </div>
+        <div class="content">
+            <p>Dear {{ ticket.customer_name if ticket.customer_name else 'Valued Customer' }},</p>
+            
+            <p>We are pleased to inform you that your repair ticket <strong class="ticket-id">#{{ ticket_id }}</strong> has been marked as completed.</p>
+
+            <h4>Ticket Summary:</h4>
+            <table class="ticket-details">
+                <tr>
+                    <th>Ticket ID</th>
+                    <td>#{{ ticket_id }}</td>
+                </tr>
+                <tr>
+                    <th>Device Type</th>
+                    <td>{{ ticket.device_type | default('N/A') }}</td>
+                </tr>
+                {% if ticket.serial_number %}
+                <tr>
+                    <th>Serial Number</th>
+                    <td>{{ ticket.serial_number }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Issue Description</th>
+                    <td>{{ ticket.description | default('N/A') }}</td>
+                </tr>
+            </table>
+            
+            <p>Please contact us at your earliest convenience to arrange for pickup or to discuss any further steps. You can reach us at [Your Shop Phone Number] or reply to this email.</p>
+            
+            <p>Thank you for choosing our services!</p>
+            
+            <p>Sincerely,<br>The <span class="shop-name">{{ app.config.MAIL_DEFAULT_SENDER[0] if app.config.MAIL_DEFAULT_SENDER is tuple and app.config.MAIL_DEFAULT_SENDER[0] else "Repair Shop" }}</span> Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; {{ now.year }} <span class="shop-name">{{ app.config.MAIL_DEFAULT_SENDER[0] if app.config.MAIL_DEFAULT_SENDER is tuple and app.config.MAIL_DEFAULT_SENDER[0] else "Your Repair Shop" }}</span>. All rights reserved.</p>
+            <p>[Your Shop Address] | [Your Shop Website (Optional)]</p>
+        </div>
+    </div>
+</body>
+</html>
